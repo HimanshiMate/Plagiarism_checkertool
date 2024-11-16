@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #64a28c;
+        }
+
+        #contain {
+            display: grid;
+            grid-template-columns: auto auto;
+            margin-bottom: 100px;
+            margin-top: 60px;
+        }
+
+        #box1 {
+            width: 700px;
+            height: 450px;
+            border: 2px solid white;
+            background-color: #f0f0f0;
+            color: black;
+            border-radius: 20px;
+            margin-left: 60px;
+            padding: 50px;
+            word-spacing: 5px;
+            box-shadow: 0 0 10px #aaa;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        #box1:hover {
+   
+       background-color: white;
+      box-shadow: 0 0 20px #666; 
+       transform: scale(1.02); 
+       border-color: #ccc; 
+}
+        h2 {
+            color: #277459;
+        }
+
+        #box2 {
+            width: 700px;
+            height: 450px;
+            border: 2px solid white;
+            background-color: #f0f0f0;
+            color: black;
+            border-radius: 20px;
+            /* margin-left: 100px; */
+            padding: 50px;
+            word-spacing: 5px;
+            box-shadow: 0 0 10px #aaa;
+            line-height: 1.6;
+            font-size: 18px;
+            margin-top: 350px;
+           margin-left: -20px;
+
+        }
+        #box2:hover {
+   
+   background-color: white;
+  box-shadow: 0 0 20px #666; 
+   transform: scale(1.02); 
+   border-color: #ccc; 
+}
+        h1{
+            color: rgb(7, 76, 55);
+            margin-top: 30px;
+        
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+    <h1>ABOUT OUR PLAGIARISM CHECKER</h1>
+</center>
+    <div id="contain">
+
+        <div id="box1">
+            <h2>Welcome to Plagiarism Checker</h2>
+            <p>Our plagiarism checker is designed to help students, educators, writers, and professionals ensure that
+                their work is free of plagiarism. Whether you're working on a research paper, article, or any type of
+                content, our tool provides a quick and easy way to verify originality.</p>
+            <p>We believe that maintaining originality is crucial for academic and professional success. Our tool helps
+                you compare your work against billions of online resources, ensuring that your content is unique.</p>
+
+        </div>
+
+
+        <div id="box2">
+            <h2>Why Use Our Plagiarism Checker?</h2>
+            <ul>
+                <li>Fast and accurate plagiarism detection.</li>
+                <li>Compares content against billions of web pages, research papers, and academic sources.</li>
+                <li>User-friendly interface for uploading documents.</li>
+                <li>Detailed plagiarism reports highlighting duplicate content.</li>
+                <li>Supports multiple file formats including .docx, .pdf, and .txt.</li>
+                <li>Safe and secure — your data is protected.</li>
+            </ul>
+
+        </div>
+
+    </div>
+</body>
+{% endblock %}
+
+</html>

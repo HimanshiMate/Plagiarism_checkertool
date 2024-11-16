@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+    {% block content %}
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Plagiarism Checker</h1>
+            <p>"Plagiarism checkers serve as a bridge between <br> integrity and creativity,  ensuring that original <br> ideas are protected and acknowledged."</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-hero">Know more > </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'images/plagimg.jpg' %}" alt="Woman Working at Laptop">
+        </div>
+    </section>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    <header>
+        <div class="header-container">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'login' %}">Plagiarism Checker</a></li>
+                    <div id="logbtn">
+                        
+                        <button class="btn-login"><a href="{% url 'login' %}" >Login</a></button>
+                        <button class="btn-regi"><a href="{% url 'home' %}" >Logout</a></button>
+                       <!-- <button class="btn-regi"><a href="{% url 'home' %}" >Logout</a></button> -->
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    {% block content %}
+
+
+    {% endblock %}
+    <!-- ======================Footer================== -->
+    
+        <footer>
+            <div class="footer-container">
+              <p>&copy; 2024 Plagiarism Checker. All Rights Reserved.</p>
+              <ul class="footer-links">
+                <li><a href="#terms">Terms & Conditions</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+              </ul>
+              <p>This tool helps detect similarities and duplicate content. Please ensure all work adheres to proper citation practices.</p>
+            </div>
+          </footer>
+   <script href="{% static 'js/index.js' %}"></script>       
+  
+</body>
+</html>    

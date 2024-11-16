@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Checker</title>
+    <style>
+        body {
+            background-image: url('https://png.pngtree.com/background/20210714/original/pngtree-doodles-on-green-chalkboard-background-back-to-school-background-picture-image_1207855.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            
+        }
+
+        .container {
+            background-color:transparent;
+            border: 2px solid #7c887f;
+            margin: 100px auto;
+            padding: 20px;
+            width: 60%;
+            box-shadow: 0px 0px 10px rgba(79, 83, 84, 0.1);
+            border-radius: 20px;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        textarea,
+        input[type="url"],
+        input[type="file"] {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 20px;
+            /* border: 2px solid white; */
+        }
+
+        textarea,
+
+        input[type="file"] {
+            background-color: white;
+
+        }
+
+        textarea,
+
+        input[type="text"] {
+            border-radius: 20px;
+
+        }
+
+        input[type="submit"] {
+            background-color: #3b864d;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid white;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0e6725;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .results h2 {
+            color: black;
+        }
+
+        .results ul {
+            list-style-type: none;
+        }
+
+        .results li {
+            background-color: #f0f0f0;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #input_text::placeholder {
+            font-size: 30px;
+            text-align: center;
+            text-decoration: double;
+        }
+
+        /* .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        } */
+        .radio-group{
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+             
+        }
+
+        .radio-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .radio-container input[type="radio"] {
+            display: none;
+        }
+
+        .radio-label {
+            position: relative;
+            padding-left: 35px;
+            font-size: 16px;
+            color: #dbd9d9;
+            user-select: none;
+        }
+
+        .radio-label::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #999;
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s;
+        }
+
+        .radio-container input[type="radio"]:checked+.radio-label::before {
+            border-color: #4CAF50;
+        }
+
+        .radio-label::after {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            width: 10px;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .radio-container input[type="radio"]:checked+.radio-label::after {
+            transform: translateY(-50%) scale(1);
+        }
+    </style>
+</head>
+
+<body style="color: white;">
+
+    <center>
+        <div class="container" >
+            <h1>Check for Plagiarism</h1>
+
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Text Input -->
+                <div id="text_input_div">
+                    <label for="input_text">Enter Text:</label><br>
+                    <textarea name="input_text" id="input_text" placeholder="Enter Text" rows="10" required></textarea>
+                    <br><br>
+                </div>
+
+                <!-- URL Input -->
+                <div id="url_input_div" class="hidden">
+                    <label for="url">Provide a URL for web comparison:</label><br>
+                    <input type="url" name="url" id="url" placeholder="https://example.com">
+                    <br><br>
+                </div>
+
+                <!-- File Upload -->
+                <div id="file_input_div" class="hidden">
+                    <label for="document">Upload a document:</label><br>
+                    <input type="file" name="document" id="document" accept=".txt, .doc, .docx, .pdf">
+                    <br><br>
+                </div>
+
+                <!-- Input Method Selection -->
+                <!-- <div id="radiobtn">
+                <label for="input_method">Select Input Method:</label><br>
+                <input type="radio" name="input_method" value="text" id="text_input" checked> Text Input
+                <input type="radio" name="input_method" value="url" id="url_input"> URL
+                <input type="radio" name="input_method" value="file" id="file_input"> Upload Document<br><br>
+               </div> -->
+                <div class="radio-group">
+                    <label class="radio-container">
+                        <input type="radio" name="input_method" value="text" id="text_input" checked>
+                        <span class="radio-label">Text Input</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="input_method" value="url" id="url_input">
+                        <span class="radio-label">URL</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="input_method" value="file" id="file_input">
+                        <span class="radio-label">Upload Document</span>
+                    </label>
+                </div>
+                <input type="submit" value="Check Plagiarism"><br><br>
+
+                <!-- Results Section -->
+                {% if error_message %}
+                <p class="error-message" style="color: #ff4c4c; font-weight: bold;">{{ error_message }}</p>
+                {% endif %}
+
+                {% if original_content_message %}
+                <p class="original-message" style="color: #dbe1db; font-weight: bold;">{{ original_content_message }}
+                </p>
+                {% endif %}
+            </form>
+        </div>
+    </center>
+    <script>
+        // JavaScript to handle dynamic input display
+        document.addEventListener('DOMContentLoaded', function () {
+            const textRadio = document.getElementById('text_input');
+            const urlRadio = document.getElementById('url_input');
+            const fileRadio = document.getElementById('file_input');
+
+            const textDiv = document.getElementById('text_input_div');
+            const urlDiv = document.getElementById('url_input_div');
+            const fileDiv = document.getElementById('file_input_div');
+
+            function toggleInputFields() {
+                textDiv.classList.toggle('hidden', !textRadio.checked);
+                urlDiv.classList.toggle('hidden', !urlRadio.checked);
+                fileDiv.classList.toggle('hidden', !fileRadio.checked);
+
+                document.getElementById('input_text').required = textRadio.checked;
+                document.getElementById('url').required = urlRadio.checked;
+                document.getElementById('document').required = fileRadio.checked;
+            }
+
+            textRadio.addEventListener('change', toggleInputFields);
+            urlRadio.addEventListener('change', toggleInputFields);
+            fileRadio.addEventListener('change', toggleInputFields);
+
+            toggleInputFields();
+
+            document.querySelector('form').addEventListener('submit', function (e) {
+                if (urlRadio.checked && !document.getElementById('url').value.match(/^https?:\/\/.+\..+/)) {
+                    alert('Please enter a valid URL.');
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+{% endblock %}
+
+</html>
